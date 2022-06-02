@@ -1,0 +1,52 @@
+import { createContext, useReducer } from 'react';
+
+export interface {{title}}State {}
+
+export interface {{title}}ContextProps {}
+
+export const init{{title}}State: {{title}}State = {};
+
+{{#if isContext}}
+export const {{title}}Context = createContext(init{{title}}State);
+
+interface {{title}}ContextProviderProps {
+  children: JSX.Element
+}
+{{/if}}
+
+enum {{title}}ActionType {
+    'DEFAULT' = 'DEFAULT'
+}
+
+interface {{title}}Actions {
+    type: {{title}}ActionType
+}
+
+export const {{camelCase title}}Reducer = (state: any, action: {{title}}Actions) => {
+  switch (action.type) {
+    case {{title}}ActionType.DEFAULT:
+      return state
+
+    default:
+      return state;
+  }
+};
+
+{{#if isContext}}
+function {{title}}ContextProvider(
+  props: {{title}}ContextProviderProps
+): JSX.Element {
+  const [{{ camelCase title}}State, dispatch{{title}}] = useReducer({{ camelCase title}}Reducer, init{{title}}State);
+
+  const value: {{title}}ContextProps = {};
+
+  return (
+    <{{title}}Context.Provider value={value}>
+      {props.children}
+    </ {{title}}Context.Provider>
+  );
+}
+
+export default {{title}}ContextProvider;
+{{/if}}
+
